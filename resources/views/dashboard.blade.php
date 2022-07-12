@@ -4,7 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    <div id="chart" style="height: 300px;" class="w-50"  ></div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -15,3 +15,16 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    const chart = new Chartisan({
+      el: '#chart',
+      url: "@chart('new_chart')",
+      hooks: new ChartisanHooks()
+            .colors()
+            .responsive()
+            .beginAtZero()
+            .legend({ position: 'bottom' })
+            .title('This is a sample chart using chartisan!')
+            .datasets([{ type: 'line', fill: false }, 'bar']),
+    });
+  </script>
