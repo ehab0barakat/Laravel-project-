@@ -16,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/shop', function () {
     return view('shopping');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+Route::resource('m-manger', "App\Http\Controllers\ManagerController");
+Route::resource('m-user', "App\Http\Controllers\UsersController");
+Route::resource('m-book', "App\Http\Controllers\booksController");
+Route::resource('m-category', "App\Http\Controllers\CategoriesController");
+
