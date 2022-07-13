@@ -1,62 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends("layouts.app") ;
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-    </script>
-    <body>
+@section("header")
+new post
+@endsection
 
-         <nav class="navbar fixed-top navbar-expand-lg bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Mktabaty</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">My Books</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Favorites</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="navbar-text nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Login Account
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+@section("content")
 
-            </div>
-            </div>
-         </nav>
          <div class="container ">
-            <div class="row mt-3 w-20 ">
-              <div class=" mt-5 ">
+            <div class="row   ">
+              <div class="  ">
                     <nav class="navbar bg-light float-end">
-                        <div class="container-fluid">  Ordered By : 
-                            <div class="btn-group p-2" role="group" aria-label="Basic mixed styles example">
+                        <div class="container-fluid ">  Ordered By :
+                            <div class="btn-group pe-2 " role="group" aria-label="Basic mixed styles example">
                                 <button type="button " class="btn btn-danger"> Latest</button>
                                 <button type="button" class="btn btn-success"> Rate</button>
                               </div>
-                          <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                          <form class="d-flex mt-3" role="formsearch">
+                            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                           </form>
                         </div>
@@ -65,7 +25,7 @@
             </div>
          </div>
               </div>
-              <div class="row">
+              <div class="row m-0">
                 <div class="col-lg-3 col-md-6 pt-5">
                     <ul class="list-group list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -113,49 +73,41 @@
                       </ul>
                 </div>
 
-                    <div class="col pt-5">
-                      <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/7f/f8/1b/7ff81b8fef7bca1ba2616cf5543450a0.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Book title</h5>
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                @foreach ($books as $book)
+
+                <div class="col pt-5">
+
+                    <div class="card h-100">
+                        <div class="d-flex " >
+                            <td><a href="{{route('m-book.edit' , $book->id )}}" class="btn p-0  btn-primary">Update</a></td>
+
+                            {!! Form::open(['route' => ['m-book.destroy' , $book->id ]  , "class" => "btn  p-0 btn-danger" , "method" => "delete"]) !!}
+
+                            <td><button  class="btn p-1 btn-danger">Delete</button></td>
+
+                            {!! Form::close() !!}
                         </div>
+                        <img src="{{ $book->image  }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $book->title  }}</h5>
+                            <p class="card-text"> {{ $book->description  }}</p>
+                        </div>
+
                         <div class="card-footer">
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <button type="button" class="btn btn-warning ">Buy</button>
-                                </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col pt-5">
-                      <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/67/63/63/6763638968d333d1629c55102cc4afeb.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Book title</h5>
-                          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                            <button type="button" class="btn btn-warning ">Buy</button>
                             </div>
                         </div>
-                      </div>
                     </div>
-                    <div class="col pt-5">
-                      <div class="card h-100">
-                        <img src="https://i.pinimg.com/564x/9a/ce/1b/9ace1bcb5a2e6fa2c818505fe22a93f8.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Book title</h5>
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-warning ">Buy</button>
-                                </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+                @endforeach
+
+                {!! Form::open(['route' => ['m-book.create']  , "class" => "btn  btn-danger" , "method" => "get"]) !!}
+
+                <td><button  class="btn  btn-danger">ADD BOOK</button></td>
+
+                {!! Form::close() !!}
+
               </div>
               <div class="pt-5">
               <nav aria-label="Page navigation example ">
@@ -172,4 +124,8 @@
                 </ul>
               </nav>
               </div>
-    </body>
+
+
+
+
+    @endsection
