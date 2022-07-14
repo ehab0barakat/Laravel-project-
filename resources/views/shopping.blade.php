@@ -11,11 +11,14 @@ new post
                     <nav class="navbar bg-light  float-end">
                         <div class="container-fluid ">  Ordered By :
                             <div class="btn-group pl-2 " role="group" aria-label="Basic mixed styles example">
+
                                 {!! Form::open(['route' => ['m-book.latest']  , "class" => "btn  p-0 ml-2 btn-danger" , "method" => "get"]) !!}
 
                                 <td><button  class="btn p-1 btn-danger">Latest</button></td>
 
                                 {!! Form::close() !!}
+
+
 
                                 {!! Form::open(['route' => ['m-book.rate']  , "class" => "btn  p-0 btn-success" , "method" => "get"]) !!}
 
@@ -24,10 +27,30 @@ new post
                                 {!! Form::close() !!}
 
                               </div>
-                          <form class="d-flex mt-3" role="formsearch">
-                            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                          </form>
+
+
+
+                              {!! Form::open(['route' => ['m-book.search'] , "class" => "container"  , "method" => "get" ]); !!}
+
+                              <div class="mb-3">
+                                <label class="form-label">search</label>
+                                {!! Form::text('search', null , ["class" => "form-control"] ); !!}
+                              </div>
+
+                              <p>
+                                <label class="form-label">auther name</label>
+                                {!! Form::radio('in', 'auther'); !!}
+
+                                <label class="form-label">book title</label>
+                                {!! Form::radio('in', 'title'); !!}
+                              </p>
+
+
+                              <button type="submit" class="btn btn-primary text-dark">Submit</button>
+
+                              {!! Form::close() !!}
+
+
                         </div>
                       </nav>
               </div>

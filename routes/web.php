@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Book ;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +37,7 @@ Route::get('/shop', function () {
 
 
 // ------------------------- (        start of orderby and search        ) -------------------------------------------
+
 Route::get('/book/latest', function () {
 
     return view('shopping' , [ "books" => book::latest()->get() ]);
@@ -54,8 +57,20 @@ Route::get('/book/rate', function () {
 
 
 
-Route::get('book/{search}', function () {
-    
-    return view('shopping');});
+Route::get('/book/search', function (request $request) {
+    if($request->in == "auther"){
+        $books = book::where("auther", $request->search)->get() ;
+    }
+    else if($request->in == "title"){
+
+        $books = book::where("title" , "like" ,  $request->search . "%")->get() ;
+    }
+    else {
+        $books = [] ;
+    }
+
+    return view('shopping' ,["books" => $books ]);
+
+})->name('m-book.search');
 
 // ------------------------- (   end of orderby and search    ) -------------------------------------------
