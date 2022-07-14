@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,10 @@ require __DIR__.'/auth.php';
 Route::resource('m-manger', "App\Http\Controllers\ManagerController");
 Route::resource('m-user', "App\Http\Controllers\UsersController");
 Route::resource('m-book', "App\Http\Controllers\booksController");
-Route::resource('m-category', "App\Http\Controllers\CategoriesController");
+
+// 
+Route::resource('Categories', CategoriesController:: class)->middleware(['auth']);
+// 
 
 Route::get('/shop', function () {
     return view('shopping');

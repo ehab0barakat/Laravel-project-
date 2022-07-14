@@ -117,6 +117,6 @@ class BooksController extends Controller
     public function destroy(Book $book , $id)
     {
         $book->find($id)->delete();
-        return redirect()->route("m-book.index"); ;
+        return redirect()->route("m-book.index"); 
     }
 }

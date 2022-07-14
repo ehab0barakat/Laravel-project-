@@ -1,4 +1,4 @@
-@extends("layouts.app") ;
+@extends("layouts.app") 
 
 @section("header")
 new post
@@ -34,7 +34,7 @@ new post
 
 
     <div class="mb-3">
-      <label class="form-label">image link</label>
+      <label class="form-label">Categories</label>
       {!! Form::select('category_name_index', $categories ); !!}
     </div>
 
