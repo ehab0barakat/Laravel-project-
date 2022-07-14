@@ -17,12 +17,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('m-book.index')" :active="request()->routeIs('m-book.index')">
-                        {{ __('SHOP') }}
+                        {{ __('Home') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('MY Profile') }}
+                    </x-nav-link>
+
                 </div>
-                <x-nav-link :href="('../shop')" >
-                    {{ __('Home') }}
-                </x-nav-link>
+
 
             </div>
 

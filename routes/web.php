@@ -19,6 +19,11 @@ Route::get('/', function () {
 });
 
 
+Route::get('/shop', function () {
+    return view('shopping' , ["books" => book::all()]);
+});
+
+
 // ------------------------- (        start of orderby and search        ) -------------------------------------------
 
 Route::get('/book/latest', function () {
@@ -71,7 +76,7 @@ require __DIR__.'/auth.php';
 
 Route::resource('m-manger', "App\Http\Controllers\ManagerController");
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
-Route::resource('Books', "App\Http\Controllers\booksController");
+Route::resource('m-book', "App\Http\Controllers\booksController");
 Route::resource('m-category', "App\Http\Controllers\CategoriesController");
 
 Route::group(['prefix' => 'users'], function() {
