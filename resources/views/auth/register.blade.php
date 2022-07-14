@@ -26,6 +26,11 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
+            <div class="mt-4">
+                <x-label for="username" :value="__('username')" />
+
+                <x-input id="username" class="block mt-1 w-full" type="ysername" name="username" :value="old('username')" required />
+            </div>
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
@@ -57,3 +62,4 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+
