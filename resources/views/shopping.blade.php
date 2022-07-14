@@ -32,13 +32,13 @@
                   </li>
                   <li class="nav-item dropdown">
                     <a class="navbar-text nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Login Account
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                        Login Account
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ route('users.index') }}">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      </ul>
                   </li>
                 </ul>
               </div>
@@ -50,7 +50,7 @@
             <div class="row mt-3 w-20 ">
               <div class=" mt-5 ">
                     <nav class="navbar bg-light float-end">
-                        <div class="container-fluid">  Ordered By : 
+                        <div class="container-fluid">  Ordered By :
                             <div class="btn-group p-2" role="group" aria-label="Basic mixed styles example">
                                 <button type="button " class="btn btn-danger"> Latest</button>
                                 <button type="button" class="btn btn-success"> Rate</button>
