@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoriesController extends Controller
 {
@@ -13,7 +14,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $Categories = Category ::all();
+
+        return view('categories.index',compact('Categories'));
     }
 
     /**
@@ -23,7 +26,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
+
     }
 
     /**
@@ -34,7 +38,13 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'id' => 'required',
+        ]);
+        $show = Category::create($validatedData);
+   
+        return redirect('/categories')->with('success', 'Category is successfully saved');
     }
 
     /**
@@ -56,7 +66,10 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $Category = Category::findOrFail($id);
+
+        return view('Categories.Edit', compact('Category'));
     }
 
     /**
@@ -68,7 +81,13 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'id' => 'required'
+        ]);
+        Category::whereId($id)->update($validatedData);
+
+        return redirect('/categories')->with('success', 'Category Data is successfully updated');
     }
 
     /**
@@ -79,6 +98,12 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Category->find($id)->delete();
+        return redirect()->route("Categories.index");
+
+
+        $Category = Category::findOrFail($id);
+        $Category->delete();
+        return redirect('/Categories')->with('success', 'Category Data is successfully deleted');
     }
 }
