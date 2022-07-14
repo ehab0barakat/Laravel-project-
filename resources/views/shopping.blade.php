@@ -38,11 +38,18 @@ new post
                               </div>
 
                               <p>
-                                <label class="form-label">auther name</label>
-                                {!! Form::radio('in', 'auther'); !!}
 
-                                <label class="form-label">book title</label>
-                                {!! Form::radio('in', 'title'); !!}
+                                <span class="px-4">
+                                    <label class="form-label">auther name</label>
+                                    {!! Form::radio('in', 'auther'); !!}
+
+                                </span>
+
+                                <span class="px-4">
+                                    <label class="form-label">book title</label>
+                                    {!! Form::radio('in', 'title'); !!}
+                                </span>
+
                               </p>
 
 
@@ -105,11 +112,14 @@ new post
                       </ul>
                 </div>
 
+
+                @if ($books)
+
                 @foreach ($books as $book)
 
                 <div class="col-2 pt-5">
-
                     <div class="card h-100">
+
                         @if (auth()->user()->isAdmin)
                         <div class="d-flex " >
 
@@ -140,14 +150,19 @@ new post
                     </div>
                 </div>
                 @endforeach
+
+                @else
+                <div class="col-3 pt-5"> there is no such a data like u searched for . </div>
+                @endif
+
+
+
                 @if (auth()->user()->isAdmin)
-
                 {!! Form::open(['route' => ['m-book.create']  , "class" => "btn  btn-danger" , "method" => "get"]) !!}
-
                 <td><button  class="btn  btn-danger">ADD BOOK</button></td>
-
                 {!! Form::close() !!}
                 @endif
+
 
               </div>
               <div class="pt-5">
