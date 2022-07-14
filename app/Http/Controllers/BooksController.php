@@ -94,8 +94,14 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book , $id)
     {
+
+        $cat_arr =[] ;
+        foreach (category::all() as $cat) {
+            array_push($cat_arr , $cat->id) ;
+          }
+
         $book->find($id)->update([
             "title" =>$request->title,
             "auther" =>$request->auther,

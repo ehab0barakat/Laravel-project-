@@ -7,7 +7,7 @@ new post
 @section("content")
 
 
-{!! Form::open(['route' => 'm-book.store' , "class" => "container" ]) !!}
+{!! Form::open(['route' => ['m-book.update' , $book->id ] , "class" => "container"  , "method" => "put"]); !!}
 
 
     <div class="mb-3">

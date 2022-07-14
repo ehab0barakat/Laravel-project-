@@ -5,15 +5,24 @@ new post
 @endsection
 
 @section("content")
-
          <div class="container ">
             <div class="row   ">
               <div class="  ">
-                    <nav class="navbar bg-light float-end">
+                    <nav class="navbar bg-light  float-end">
                         <div class="container-fluid ">  Ordered By :
-                            <div class="btn-group pe-2 " role="group" aria-label="Basic mixed styles example">
-                                <button type="button " class="btn btn-danger"> Latest</button>
-                                <button type="button" class="btn btn-success"> Rate</button>
+                            <div class="btn-group pl-2 " role="group" aria-label="Basic mixed styles example">
+                                {!! Form::open(['route' => ['m-book.latest']  , "class" => "btn  p-0 ml-2 btn-danger" , "method" => "get"]) !!}
+
+                                <td><button  class="btn p-1 btn-danger">Latest</button></td>
+
+                                {!! Form::close() !!}
+
+                                {!! Form::open(['route' => ['m-book.rate']  , "class" => "btn  p-0 btn-success" , "method" => "get"]) !!}
+
+                                <td><button  class="btn p-1 btn-success">Rate</button></td>
+
+                                {!! Form::close() !!}
+
                               </div>
                           <form class="d-flex mt-3" role="formsearch">
                             <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
@@ -75,11 +84,17 @@ new post
 
                 @foreach ($books as $book)
 
-                <div class="col pt-5">
+                <div class="col-2 pt-5">
 
                     <div class="card h-100">
+                        @if (auth()->user()->isAdmin)
                         <div class="d-flex " >
-                            <td><a href="{{route('m-book.edit' , $book->id )}}" class="btn p-0  btn-primary">Update</a></td>
+
+                            {!! Form::open(['route' => ['m-book.edit' , $book->id ]  , "class" => "btn  p-0 btn-primary" , "method" => "get"]) !!}
+
+                            <td><button  class="btn p-1 btn-primary">Update</button></td>
+
+                            {!! Form::close() !!}
 
                             {!! Form::open(['route' => ['m-book.destroy' , $book->id ]  , "class" => "btn  p-0 btn-danger" , "method" => "delete"]) !!}
 
@@ -87,6 +102,7 @@ new post
 
                             {!! Form::close() !!}
                         </div>
+                        @endif
                         <img src="{{ $book->image  }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->title  }}</h5>
@@ -101,12 +117,14 @@ new post
                     </div>
                 </div>
                 @endforeach
+                @if (auth()->user()->isAdmin)
 
                 {!! Form::open(['route' => ['m-book.create']  , "class" => "btn  btn-danger" , "method" => "get"]) !!}
 
                 <td><button  class="btn  btn-danger">ADD BOOK</button></td>
 
                 {!! Form::close() !!}
+                @endif
 
               </div>
               <div class="pt-5">
