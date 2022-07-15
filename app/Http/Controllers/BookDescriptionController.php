@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Book;
 
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-class UsersController extends Controller
+
+class BookDescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('users.index', compact('user'));
+        $books= Book::all();
+        return view('book',['books'=>$books]);
     }
 
     /**
@@ -28,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        //
     }
 
     /**
@@ -37,14 +34,9 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(User $user,Request $request)
+    public function store(Request $request)
     {
-        $user->create(array_merge($request->all(), [
-            'password' => 'test'
-        ]));
-
-        return redirect()->route('users.index')
-            ->withSuccess(__('User created successfully.'));
+        //
     }
 
     /**
@@ -53,11 +45,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return view('users.show', [
-            'user' => $user
-        ]);
+        //
     }
 
     /**
@@ -66,11 +56,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('users.edit', [
-            'user' => $user
-        ]);    }
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -79,16 +68,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $user=User::find($id);
-        $user->update($request->all());
-        $user->save();
-        return redirect()->route('users.index') ;
-        }
-
-
-
+        //
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -96,9 +79,8 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
-        return redirect()->route('users.index');
+        //
     }
 }

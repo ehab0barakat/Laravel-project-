@@ -22,7 +22,7 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($user as $user)
+                {{-- @foreach($user as $user) --}}
 
                     <tr>
                         <th scope="row">{{ $user->id }}</th>
@@ -37,7 +37,7 @@
                             {!! Form::close() !!}
                         </td>
                     </tr>
-                @endforeach
+                {{-- @endforeach --}}
             </tbody>
         </table>
 

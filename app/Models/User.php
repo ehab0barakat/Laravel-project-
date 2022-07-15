@@ -18,7 +18,7 @@ class User extends Authenticatable
 
 
     protected $table = "users" ;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -69,6 +69,17 @@ class User extends Authenticatable
 {
     $validated = $request->validated();
     dd($validated);
+}
+
+
+
+public function roles(){
+    return $this->belongsToMany(Role::class ,'user_role' );
+}
+
+public function myRate()
+{
+    return $this->hasMany(BookRate::class);
 }
 
 }

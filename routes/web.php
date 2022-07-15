@@ -75,7 +75,8 @@ require __DIR__.'/auth.php';
 
 
 
-Route::resource('m-manger', "App\Http\Controllers\ManagerController");
+Route::resource('manager', "App\Http\Controllers\ManagerController");
+
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
