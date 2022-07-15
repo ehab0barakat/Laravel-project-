@@ -8,22 +8,16 @@ new post
          <div class="container ">
             <div class="row   ">
               <div class="  ">
-                    <nav class="navbar bg-light  float-end">
-                        <div class="container-fluid ">  Ordered By :
+                    <nav class="navbar bg-light  float-end ">
+                        <div class="container-fluid d-flex">  Ordered By :
                             <div class="btn-group pl-2 " role="group" aria-label="Basic mixed styles example">
 
                                 {!! Form::open(['route' => ['m-book.latest']  , "class" => "btn  p-0 ml-2 btn-danger" , "method" => "get"]) !!}
-
                                 <td><button  class="btn p-1 btn-danger">Latest</button></td>
-
                                 {!! Form::close() !!}
 
-
-
                                 {!! Form::open(['route' => ['m-book.rate']  , "class" => "btn  p-0 btn-success" , "method" => "get"]) !!}
-
                                 <td><button  class="btn p-1 btn-success">Rate</button></td>
-
                                 {!! Form::close() !!}
 
                               </div>
@@ -31,14 +25,11 @@ new post
 
 
                               {!! Form::open(['route' => ['m-book.search'] , "class" => "container"  , "method" => "get" ]); !!}
-
-                              <div class="mb-3">
+                              <div class="d-flex mb-3">
                                 <label class="form-label">search</label>
                                 {!! Form::text('search', null , ["class" => "form-control"] ); !!}
                               </div>
-
                               <p>
-
                                 <span class="px-4">
                                     <label class="form-label">auther name</label>
                                     {!! Form::radio('in', 'auther'); !!}
@@ -49,15 +40,9 @@ new post
                                     <label class="form-label">book title</label>
                                     {!! Form::radio('in', 'title'); !!}
                                 </span>
-
                               </p>
-
-
-                              <button type="submit" class="btn btn-primary text-dark">Submit</button>
-
+                              <button type="submit" class="btn btn-primary text-dark d-flex">Submit</button>
                               {!! Form::close() !!}
-
-
                         </div>
                       </nav>
               </div>
@@ -114,37 +99,44 @@ new post
 
 
                 @if ($books)
-
                 @foreach ($books as $book)
 
                 <div class="col-2 pt-5">
                     <div class="card h-100">
 
                         @if (auth()->user()->isAdmin)
-                        <div class="d-flex " >
+                        <div class="d-flex gap-2 mx-auto " >
 
                             {!! Form::open(['route' => ['m-book.edit' , $book->id ]  , "class" => "btn  p-0 btn-primary" , "method" => "get"]) !!}
-
                             <td><button  class="btn p-1 btn-primary">Update</button></td>
-
                             {!! Form::close() !!}
 
                             {!! Form::open(['route' => ['m-book.destroy' , $book->id ]  , "class" => "btn  p-0 btn-danger" , "method" => "delete"]) !!}
-
                             <td><button  class="btn p-1 btn-danger">Delete</button></td>
-
                             {!! Form::close() !!}
                         </div>
                         @endif
-                        <img src="{{ $book->image  }}" class="card-img-top" alt="...">
+                        <br>
+
+                        <img src="{{ $book->image  }}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->title  }}</h5>
-                            <p class="card-text"> {{ $book->description  }}</p>
+                            <p class="card-text"> {{ $book->auther  }}</p>
+                            <p class="card-text"> {{ $book->price  }}</p>
+                            <!-- <p class="card-text"> {{ $book->description  }}</p> -->
                         </div>
 
                         <div class="card-footer">
-                            <div class="d-grid gap-2 col-6 mx-auto">
+                            <div class="d-flex gap-2 col-6 mx-auto">
                                 <button type="button" class="btn btn-warning ">Buy</button>
+
+                                {!! Form::open(['route' =>['Favorites.store'],"class" => "btn AddToFavorites","method"=> "POST"])!!}                                
+                                <button type="button" class="btn btn-outline-danger ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path></svg>
+                                </button>
+                                {!! Form::close() !!}
+
+                               
                             </div>
                         </div>
                     </div>
@@ -180,8 +172,6 @@ new post
                 </ul>
               </nav>
               </div>
-
-
-
-
     @endsection
+
+    

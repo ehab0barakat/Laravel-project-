@@ -21,7 +21,9 @@
         </ul>
       </div><br />
     @endif
-      <form method="put" action="{{ route('Categories.create') }}">
+
+    <form action="{{ route('Categories.store')}}" method="POST" class="float-left mr-3 px-1">
+      {{method_field('POST')}}
           <div class="form-group m-3">
               @csrf
               <label for="country_name">Category Name:</label>

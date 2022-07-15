@@ -18,7 +18,8 @@
         <tr>
           <td>ID</td>
           <td>Category Name</td>
-          <td colspan="2">Action</td>
+          <td >Action</td>
+          <td >Remove</td>
         </tr>
     </thead>
     <tbody>
@@ -26,17 +27,20 @@
         <tr>
             <td>{{$Category->id}}</td>
             <td>{{$Category->name}}</td>
-            <td><a href="{{ route('Categories.index', $Category->id)}}" class="btn btn-primary">Edit</a></td>
+            <td><a href="{{ route('Categories.edit', $Category->id)}}" class="btn btn-primary">Edit</a></td>
             <td>
-                <form action="{{ route('Categories.destroy', $Category->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
+                {!! Form::open(['method' => 'DELETE','route' => ['Categories.destroy', $Category->id],'style'=>'display:inline']) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                {!! Form::close() !!}
             </td>
         </tr>
         @endforeach
     </tbody>
+    
   </table>
+  
+  {!! Form::open(['route' => ['Categories.create']  , "class" => "btn  btn-primary" , "method" => "get"]) !!}
+                <td><button  class="btn btn-primary ">ADD Category</button></td>
+  {!! Form::close() !!}
 <div>
 @endsection

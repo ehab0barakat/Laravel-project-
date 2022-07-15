@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Favorites;
+use App\Models\Book ;
+use App\Models\User ;
 
-class CategoriesController extends Controller
+class FavoritesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,12 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $Categories = Category ::all();
-
-        return view('categories.index',compact('Categories'));
+        $Books = auth()->user()
+                 ->Favorite()
+                 ->Latest()
+                 ->get();
+                //  dd($Books);
+        return view('Favorites',compact('Books'));
     }
 
     /**
@@ -26,8 +31,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
-
+        //
     }
 
     /**
@@ -38,12 +42,9 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'id' => 'required',
-        ]);
-        $show = Category::create($validatedData);
-        return redirect()->route ('Categories.index');
+        if (! auth()->user()->FavoritesHas(request('BookId'))){
+            auth()->user()->Favorite()->attach(request('BookId'));
+        }
     }
 
     /**
@@ -63,12 +64,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit(Category $Category)
     public function edit($id)
     {
-
-        $Category = Category::findOrFail($id);
-        return view('Categories.Edit', compact('Category'));
+        //
     }
 
     /**
@@ -80,12 +78,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Category = Category::findOrFail($id);
-        $Category -> update(
-            $request-> all()
-        );
-        dd ($request);
-        return redirect()->route ('Categories.index');
+        //
     }
 
     /**
@@ -94,14 +87,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $Category)
+    public function destroy(Book $Book , $id)
     {
+        auth()->user()->Favorite()->detach(request('BookId'));
 
-        $Category->delete();
-        return redirect()->route('Categories.index');
-
-        // $Category = Category::findOrFail($id);
-        // $Category->delete();
-        // return redirect('/Categories')->with('success', 'Category Data is successfully deleted');
     }
+
+
+  
 }

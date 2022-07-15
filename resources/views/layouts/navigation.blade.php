@@ -19,6 +19,16 @@
                     <x-nav-link :href="route('m-book.index')" :active="request()->routeIs('m-book.index')">
                         {{ __('Home') }}
                     </x-nav-link>
+
+                    @if (auth()->user()->isAdmin)
+                    <x-nav-link :href="route('Categories.index')" :active="request()->routeIs('Categories.index')">
+                        {{ __('categories') }}
+                    </x-nav-link>
+                    @endif
+
+                    <x-nav-link :href="route('Favorites.index')" :active="request()->routeIs('Favorites.index')">
+                        {{ __('Favorites') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('MY Profile') }}
                     </x-nav-link>

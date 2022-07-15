@@ -46,7 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
- /**
+    /**
      * Always encrypt password when it is updated.
      *
      * @param $value
@@ -63,8 +63,29 @@ class User extends Authenticatable
     }
 
     public function store(StoreUserRequest $request)
-{
+    {
     $validated = $request->validated();
     dd($validated);
-}
+    }
+
+
+    // Favorites:
+    public function Favorite()
+    {
+        return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
+    }
+
+    // 
+    public function FavoritesHas($bookId)
+    {
+        return self::Favorite()->where('book_id',$bookId)->exists();
+    }
+
+    
+
+
+
+
+
+
 }
