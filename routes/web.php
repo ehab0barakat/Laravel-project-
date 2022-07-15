@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\BooksController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -17,6 +18,12 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cart', function () {
+    $books = auth()->user()->books;
+    return view('book_cart' , compact('books'));
+})->name("cart");
+
 
 
 Route::get('/shop', function () {
@@ -76,6 +83,7 @@ require __DIR__.'/auth.php';
 
 Route::resource('m-manger', "App\Http\Controllers\ManagerController");
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
+Route::post('/buy',[BooksController::class,'buy_book'])->name('buy');
 Route::resource('m-book', "App\Http\Controllers\booksController");
 Route::resource('m-category', "App\Http\Controllers\CategoriesController");
 

@@ -67,4 +67,9 @@ class User extends Authenticatable
     $validated = $request->validated();
     dd($validated);
 }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class,"user_purchase_books")->withTimestamps();
+    }
 }

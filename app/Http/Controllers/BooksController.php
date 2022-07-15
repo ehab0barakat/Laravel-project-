@@ -125,4 +125,16 @@ class BooksController extends Controller
         $book->find($id)->delete();
         return redirect()->route("m-book.index"); ;
     }
+
+    public function buy_book(Request $request){
+        // return $request->book_id;
+        $user = User::find(auth() -> user() -> id );
+        $user -> books() -> syncWithoutDetaching([$request -> book_id]);
+        $books = $user->books;
+        return view('book_cart' , compact('books'));
+        
+
+    }
 }
+
+

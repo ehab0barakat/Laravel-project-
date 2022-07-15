@@ -23,6 +23,11 @@
                         {{ __('MY Profile') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+                        {{ __('my book') }}
+                    </x-nav-link>
+
+
                 </div>
 
 
