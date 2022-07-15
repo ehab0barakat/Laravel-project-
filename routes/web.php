@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,38 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-Route::resource('m-manger', "App\Http\Controllers\ManagerController");
+// Route::resource('m-manger', "App\Http\Controllers\ManagerController");
 Route::resource('m-user', "App\Http\Controllers\UsersController");
 Route::resource('m-book', "App\Http\Controllers\booksController");
 Route::resource('m-category', "App\Http\Controllers\CategoriesController");
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'manager'], function() {
+    Route::get('/', 'App\Http\Controllers\ManagerController@index')->name('manager.index');
+    Route::get('/{manager}/edit', 'App\Http\Controllers\ManagerController@edit')->name('manager.edit');
+    Route::put('/{manager}/update', 'App\Http\Controllers\ManagerController@update')->name('manager.update');
+    Route::delete('/{manager}/delete', 'App\Http\Controllers\ManagerController@destroy')->name('manager.destroy');
+});
+
+
+
+
+Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
+// Route::resource('bookComment', 'BookCommentController');
+Route::group(['prefix' => 'BookComment'], function() {
+    Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
+    // Route::put('/{manager}/update', 'App\Http\Controllers\ManagerController@update')->name('manager.update');
+    // Route::delete('/{manager}/delete', 'App\Http\Controllers\ManagerController@destroy')->name('manager.destroy');
+});
+
+
+
+
+
+
+
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
