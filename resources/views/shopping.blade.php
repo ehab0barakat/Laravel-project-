@@ -1,4 +1,4 @@
-@extends("layouts.app") 
+@extends("layouts.app")
 
 @section("header")
 new post
@@ -149,7 +149,7 @@ new post
                         </div>
                     </div>
                 </div>
-                @endforeach
+            @endforeach
 
                 @else
                 <div class="col-3 pt-5"> there is no such a data like u searched for . </div>
