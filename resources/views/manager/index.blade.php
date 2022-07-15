@@ -36,40 +36,57 @@
                                     </td>
 
                                     <td class="d-flex">
-                                    
 
-                                     
+
+
                                      <a href="{{ route('manager.edit',$user->id) }}">
                                          <button type="button" class="btn btn-primary float-left mr-3 " >Edit</button>
                                      </a>
-                                
 
-{{--                                      
+
+{{--
                                         {!! Form::open(['method' => 'DELETE','route' => ['manager.destroy', $user->id],'style'=>'display:inline']) !!}
                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                                         {!! Form::close() !!}
                                      --}}
-                                 
+
                                      <form action="{{ route('manager.destroy' , $user->id)}}" method="POST" class="float-left mr-3 px-1">
                                          @csrf
                                          {{method_field('DELETE')}}
                                          <button type="submit" class="btn btn-danger ">Delete</button>
 
-                                     </form> 
-                               
-
-
-
+                                     </form>
 
                                     </td>
-                    
-                                    <td class="bg-danger">
+
+                                    <td class="bg-white">
+
+
                                         <span >
-                                            <input type="checkbox" data-id="{{ $user->id }}" name="isActive" class="js-switch" {{ $user->isActive == 1 ? 'checked' : '' }}>
+
+                                            <i class=" fs-1  {{ $user->isActive == 1 ? 'fa-solid fa-check  text-success ' : 'fa-solid fa-xmark  text-danger ' }}"></i>
+
+                                            {{-- <input type="checkbox" disabled width="20px" name="isActive" class="js-switch" {{ $user->isActive == 1 ? 'checked' : '' }}> --}}
+
+
                                         </span>
+
+
                                     </td>
+
+
                                 </tr>
                             @endforeach
+
+                            <tr>
+                                <form action="{{ route('manager.create')}}" method="get" class="float-left mr-3 px-1">
+                                    @csrf
+                                    {{method_field('GET')}}
+                                    <button type="submit" class="btn btn-success ">Create Manager</button>
+
+                                </form>
+                            </tr>
+
 
                         </tbody>
                       </table>
@@ -78,6 +95,9 @@
         </div>
     </div>
 </div>
+
+
+
 <br>
 <br>
 <br>

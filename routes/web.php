@@ -1,13 +1,8 @@
 <?php
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoriesController;
-=======
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers;
->>>>>>> 5a1eaf17002543ad6a8ecfe341e4ee3495609e01
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +75,8 @@ require __DIR__.'/auth.php';
 
 
 
-Route::resource('m-manger', "App\Http\Controllers\ManagerController");
+Route::resource('manager', "App\Http\Controllers\ManagerController");
+
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
@@ -103,42 +99,3 @@ Route::group(['prefix' => 'users'], function() {
 //     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
 //     Route::PUT('/profile', 'App\Http\Controllers\UsersController@update')->name('users.update');
 // });
-// Route::resource('m-manger', "App\Http\Controllers\ManagerController");
-Route::resource('m-user', "App\Http\Controllers\UsersController");
-Route::resource('m-book', "App\Http\Controllers\booksController");
-Route::resource('m-category', "App\Http\Controllers\CategoriesController");
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['prefix' => 'manager'], function() {
-    Route::get('/', 'App\Http\Controllers\ManagerController@index')->name('manager.index');
-    Route::get('/{manager}/edit', 'App\Http\Controllers\ManagerController@edit')->name('manager.edit');
-    Route::put('/{manager}/update', 'App\Http\Controllers\ManagerController@update')->name('manager.update');
-    Route::delete('/{manager}/delete', 'App\Http\Controllers\ManagerController@destroy')->name('manager.destroy');
-});
-
-
-
-
-Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
-// Route::resource('bookComment', 'BookCommentController');
-Route::group(['prefix' => 'BookComment'], function() {
-    Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
-    // Route::put('/{manager}/update', 'App\Http\Controllers\ManagerController@update')->name('manager.update');
-    // Route::delete('/{manager}/delete', 'App\Http\Controllers\ManagerController@destroy')->name('manager.destroy');
-});
-
-Route::group(['prefix' => 'BookRate'], function() {
-    Route::get('/', 'App\Http\Controllers\BookRateController@store')->name('BookRate.store');
-});
-
-
-
-
-
-
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
