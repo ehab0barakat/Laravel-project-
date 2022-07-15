@@ -22,7 +22,7 @@
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('MY Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
                         {{ __('my book') }}
                     </x-nav-link>
                     <x-nav-link :href="route('manager.index')" :active="request()->routeIs('manager')">

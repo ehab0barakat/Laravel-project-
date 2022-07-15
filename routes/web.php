@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\BooksController;
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoriesController;
@@ -85,7 +86,10 @@ require __DIR__.'/auth.php';
 Route::resource('manager', "App\Http\Controllers\ManagerController");
 
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
-Route::post('/buy',[BooksController::class,'buy_book'])->name('buy');
+
+
+Route::resource('cart', "App\Http\Controllers\CartController");
+
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
 //
