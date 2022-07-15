@@ -40,6 +40,18 @@ class Book extends Model
         return $this->belongsToMany(User::class,"user_purchase_books");
     }
 
+
+    public function comments(){
+        return $this->hasMany(BookComment::class);
+    }
+    // public function rates(){
+        //     return $this->hasMany(BookRate::class);
+        // }
+
+    public function ratings()
+    {
+        // return $this->hasMany('App\Models\BookRate');
+        return $this->hasMany(BookRate::class);
+    }
+
 }
-
-

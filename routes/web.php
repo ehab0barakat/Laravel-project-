@@ -103,6 +103,20 @@ Route::group(['prefix' => 'users'], function() {
 
 });
 
+
+
+Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
+// Route::resource('bookComment', 'BookCommentController');
+Route::group(['prefix' => 'BookComment'], function() {
+    Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
+});
+
+Route::group(['prefix' => 'BookRate'], function() {
+    Route::get('/', 'App\Http\Controllers\BookRateController@store')->name('BookRate.store');
+});
+
+
+
 // Route::middleware('auth')->group(function () {
 //     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
 //     Route::PUT('/profile', 'App\Http\Controllers\UsersController@update')->name('users.update');

@@ -136,7 +136,17 @@ new post
                             {!! Form::close() !!}
                         </div>
                         @endif
-                        <img src="{{ $book->image  }}" class="card-img-top" alt="...">
+
+                        <form action="{{route('m-book.show' , $book->id )}}" method="get">
+                            @csrf
+                            <button  type="submit">
+                                <img src="{{ $book->image  }}" class="card-img-top" alt="Pictuere Error">
+                            </button>
+                          </form>
+
+
+
+
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->title  }}</h5>
                             <p class="card-text"> {{ $book->description  }}</p>
