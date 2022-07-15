@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/custom') }}">
 <div class="container">
     <div class="row justify-content-center">
         @if(session()->has('success'))
@@ -48,6 +49,11 @@
                                 {!! Form::submit('Comment',['class'=>'btn btn-success mt-3 w-100']) !!}
                             </div>
                             {!! Form::close() !!}
+
+                            {{-- store Rates --}}
+                          
+                           
+
 
                           {{-- list comments --}}
                             <div class="mt-5">

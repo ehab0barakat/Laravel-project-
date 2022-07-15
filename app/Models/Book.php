@@ -19,6 +19,7 @@ class Book extends Model
         'rate',
         'category_id',
         'user_id',
+        'count',
     ];
     public function users(){
         return $this->belongsToMany(User::class,"user_purchase","book_id","user_id");
@@ -30,6 +31,8 @@ class Book extends Model
     public function rates(){
         return $this->hasMany(BookRate::class);
     }
+
+    
     
     // protected $primaryKey ='id' ;
     // protected $fillable = ["title", "auther","description" , "price" , "image" , "category_id"];

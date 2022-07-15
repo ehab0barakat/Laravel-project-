@@ -53,6 +53,10 @@ Route::group(['prefix' => 'BookComment'], function() {
     // Route::delete('/{manager}/delete', 'App\Http\Controllers\ManagerController@destroy')->name('manager.destroy');
 });
 
+Route::group(['prefix' => 'BookRate'], function() {
+    Route::get('/', 'App\Http\Controllers\BookRateController@store')->name('BookRate.store');
+});
+
 
 
 
