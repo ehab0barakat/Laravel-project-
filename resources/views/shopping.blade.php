@@ -144,7 +144,13 @@ new post
 
                         <div class="card-footer">
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-warning ">Buy</button>
+                              <form action="{{route('buy')}}" method="post">
+                                @csrf
+
+                                <input type="hidden" name="book_id" value="{{ $book->id}}">
+
+                                <input type="submit" value="buy" class="btn btn-warning ">
+                              </form>
                             </div>
                         </div>
                     </div>
@@ -185,3 +191,4 @@ new post
 
 
     @endsection
+

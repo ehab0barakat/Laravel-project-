@@ -82,4 +82,8 @@ public function myRate()
     return $this->hasMany(BookRate::class);
 }
 
+    public function books()
+    {
+        return $this->belongsToMany(Book::class,"user_purchase_books")->withTimestamps();
+    }
 }
