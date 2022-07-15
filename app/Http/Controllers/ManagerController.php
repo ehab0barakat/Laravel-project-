@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
@@ -26,7 +27,7 @@ class ManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //  function to changeStatus of user from   no active to active  
+    //  function to changeStatus of user from   no active to active
     public function changeStatus(Request $request)
 
     {
@@ -51,25 +52,51 @@ class ManagerController extends Controller
 
     }
 
-    public function index()
-    {    
 
-        // to get users with roles 
+    public function create()
+    {
+
+        return view('manager.create' , ["roles" => Role::all()]);
+    }
+
+
+    public function store(request $request ,User $user)
+    {
+        $user->create([
+            "username" => $request->username  ,
+            "name" => $request->name ,
+            "email" => $request->email ,
+            "password" => Hash::make($request->password),
+            "isAdmin" => $request->roles == "1" ? "1" : "0" ,
+        ]);
+
+        UserRole::create([
+            "role_id" => $request->roles[0] ,
+            "user_id" => $user->where("username" ,$request->username)->first()->id ,
+        ]);
+
+
+        return  redirect()->route("manager.index");
+    }
+
+
+
+
+    public function index()
+    {
         $users=User::with('roles')->get();
-    
         return view('manager.index')->with('users',$users);
     }
 
 
-    
+
 
 
 
 
     public function edit(User $user,$id)
     {
-        // dd($user::find($id));
-        // dd($id);
+
         $roles = Role::all();
         return view('manager.edit', [
             'user' => $user::find($id),
@@ -89,31 +116,33 @@ class ManagerController extends Controller
      */
     public function update(User $user, Request $request ,$id)
     {
-        
-        //  dd($request);
-        UserRole::where("user_id",$id)->update(["role_id" => $request->roles[0]]);
+
+        // dd($request);
+
+        UserRole::where("user_id",$id)->update(["role_id" => isset($request->isAdmin) ? "1" : "2"]);
+
+
+
         $user->find($id)->update([
             "name" =>$request->name,
-            "email" =>$request->email
+            "email" =>$request->email,
+            "username" =>$request->username,
+            "isAdmin" => isset($request->isAdmin) ? "1" : "0" ,
+            "isActive" => isset($request->isActive) ? "1" : "0" ,
+
         ]);
-        // dd($id);
-       
 
         return redirect()->route('manager.index');
     }
-   
+
 
     public function destroy(User $user, $id){
-        // dd($id);
-        // dd($user);
-       
         $user->find($id)->delete();
         return redirect()->route('manager.index');
 
-        
     }
 }
-        
-        
-    
+
+
+
 
