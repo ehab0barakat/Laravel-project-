@@ -17,7 +17,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        return view("shopping" , ["books" => book::all()]) ;
+        return view("shopping" , [
+            "books" => book::all() ,
+            "cats" => Category::all() ,
+            ]) ;
     }
 
     /**

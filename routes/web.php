@@ -2,6 +2,7 @@
 
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Category;
 use App\Http\Controllers\BooksController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ Route::get('/shop', function () {
 
 Route::get('/book/latest', function () {
 
-    return view('shopping' , [ "books" => book::latest()->get() ]);
+    return view('shopping' , [ "books" => book::latest()->get() ,"cats" => Category::all() ,
+]);
 
 })->name('m-book.latest');
 
@@ -66,9 +68,27 @@ Route::get('/book/search', function (request $request) {
         $books = [] ;
     }
 
-    return view('shopping' ,["books" => $books ]);
+    return view('shopping' ,["books" => $books ,"cats" => Category::all()]);
 
 })->name('m-book.search');
+
+
+
+
+
+
+
+Route::post('/book/category', function (request $request) {
+
+    // dd($id);
+    // dd($request->category_id);
+
+    return view('shopping' ,[
+        "books" => book::where("category_id", $request->category_id)->get() ,
+        "cats" => Category::all() ,
+        ] );
+
+})->name('m-book.category');
 
 // ------------------------- (   end of orderby and search    ) -------------------------------------------
 
@@ -143,3 +163,20 @@ Route::group(['prefix' => 'BookRate'], function() {
 //     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
 //     Route::PUT('/profile', 'App\Http\Controllers\UsersController@update')->name('users.update');
 // });
+
+
+
+// $cats =Category::all() ;
+
+// return view("shopping" , ["books" => book::all() ,"cats" => $cats ]) ;
+
+
+
+
+
+// Route::get('/book/search', function (request $request) {
+
+
+//     return view('shopping' ,["books" => $books ]);
+
+// })->name('category.filter');

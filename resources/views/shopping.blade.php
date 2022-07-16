@@ -48,48 +48,23 @@ new post
               <div class="row m-0">
                 <div class="col-lg-3 col-md-6 pt-5">
                     <ul class="list-group list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold"><a href="#">Food</a></div>
 
-                          </div>
-                          <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold"><a href="#">History</a></div>
+                        @foreach ($cats as $cat )
 
-                          </div>
-                          <span class="badge bg-primary rounded-pill">6</span>
-                        </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold"><a href="#">Kids</a></div>
+                        {!! Form::open(['route' => ['m-book.category']   , "method" => "post"]) !!}
+                        <input type="text" name='category_id' hidden value="{{$cat->id}}">
+                        <td><button  class="btn p-1 ">{{$cat->name}}</button></td>
+                        {!! Form::close() !!}
 
-                          </div>
-                          <span class="badge bg-primary rounded-pill">13</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold"><a href="#">Businesse</a></div>
+                    </li>
+{{--
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><a href="#">{{$cat->name}}</a></div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">{{$cat->count}}</span> --}}
 
-                          </div>
-                          <span class="badge bg-primary rounded-pill">7</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold"><a href="#">Computer science</a></div>
-
-                          </div>
-                          <span class="badge bg-primary rounded-pill">3</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold"><a href="#">Arts</a></div>
-
-                          </div>
-                          <span class="badge bg-primary rounded-pill">20</span>
-                        </li>
+                        @endforeach
                       </ul>
                 </div>
 
