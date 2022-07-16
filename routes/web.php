@@ -107,3 +107,13 @@ Route::group(['prefix' => 'users'], function() {
 //     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
 //     Route::PUT('/profile', 'App\Http\Controllers\UsersController@update')->name('users.update');
 // });
+
+#Manage Post
+Route::get('/post-create','App\Http\Controllers\PostController@create')->name('post.create');
+Route::post('/post-store','App\Http\Controllers\PostController@store')->name('post.store');
+Route::get('/post-list','App\Http\Controllers\PostController@list')->name('post.list');
+Route::get('/post-view/{id}','App\Http\Controllers\PostController@view')->name('post.view');
+
+#Manage Review
+Route::post('/review-store',[PostController::class, 'reviewstore'])->name('review.store');
+

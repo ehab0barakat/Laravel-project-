@@ -31,8 +31,6 @@
                     </div>
                   </div>
                 </th>
-
-
                 <td class="align-middle">
                   <p class="mb-0" style="font-weight: 500;">{{ $book->description  }}</p>
                 </td>
@@ -40,6 +38,7 @@
                   <p class="mb-0" style="font-weight: 500;">{{ $book->price  }}</p>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>

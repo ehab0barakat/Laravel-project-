@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Auth ;
 use App\Models\Book ;
+use App\Models\BookRate ;
 use App\Models\Category ;
 use App\Models\User ;
 use App\Models\Manager ;
@@ -69,7 +70,7 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        //
+     //
     }
 
     /**
@@ -100,7 +101,7 @@ class BooksController extends Controller
         $cat_arr =[] ;
         foreach (category::all() as $cat) {
             array_push($cat_arr , $cat->id) ;
-          }
+        }
 
         $book->find($id)->update([
             "title" =>$request->title,
@@ -132,9 +133,11 @@ class BooksController extends Controller
         $user -> books() -> syncWithoutDetaching([$request -> book_id]);
         $books = $user->books;
         return view('book_cart' , compact('books'));
-        
+
 
     }
-}
+    }
+
+
 
 

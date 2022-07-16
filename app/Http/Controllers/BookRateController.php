@@ -7,84 +7,29 @@ use App\Models\BookRate;
 use App\Models\User;
 use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Session;
 class BookRateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function ratings(){
+        Session::put('page', 'ratings');
+        $ratings = BookRate::with(['user', 'book'])->get()->toArray();
+        // dd($ratings);
+
+        return view('rate', compact('ratings'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function updateRatingStatus(Request $request){
+        if($request->ajax()){
+            $data= $request->all();
+            if($data['status'] == "Active"){
+                $status= 0;
+            }else{
+                $status = 1;
+            }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request )
-    {
-    
-       
-           
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            BookRate::where('id', $data['rating_id'])->update(['status'=>$status]);
+            return response()->json(['status'=>$status, 'rating_id'=> $data['rating_id']]);
+        }
     }
 }
