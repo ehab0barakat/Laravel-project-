@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
@@ -15,8 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::latest()->paginate(1);
-
+        $user = Auth::user();
         return view('users.index', compact('user'));
     }
 

@@ -24,4 +24,14 @@ class Favorites extends Model
     // {
     //     return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
     // }
+
+    // public function Favorite()
+    // {
+    //     return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
+    // }
+
+    // public function FavoritesHas($bookId)
+    // {
+    //     return self::Favorite()->where('book_id',$bookId)->exists();
+    // }
 }

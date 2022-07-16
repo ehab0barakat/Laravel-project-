@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
-
 use App\Models\User;
+use App\Models\Book;
 
 
 class Book extends Model
 {
     use HasFactory;
 
-
     protected $table = "books" ;
-
-    // protected $primaryKey ='id' ;
     protected $fillable = ["title", "auther","description" , "price" , "image" , "category_id" ];
-
-
 
 
 
@@ -34,6 +29,17 @@ class Book extends Model
         return $this->belongsToMany(Book::class);
     }
 
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,"user_purchase_books");
+    }
+
+    // 
+    public function user()
+    {
+        return $this->belongsToMany(User::class,"user_favourites_books");
+    }
 }
 
 

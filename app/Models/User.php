@@ -16,6 +16,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+    protected $table = "users" ;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +27,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
     ];
 
@@ -36,7 +40,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function setPasswordAttribute($password)
+    {
+    $this->attributes['password'] = bcrypt($password);
+    }
     /**
      * The attributes that should be cast.
      *
@@ -52,10 +59,6 @@ class User extends Authenticatable
      * @param $value
      * @return string
      */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
 
     public function relate_book()
     {
@@ -69,23 +72,27 @@ class User extends Authenticatable
     }
 
 
-    // Favorites:
-    public function Favorite()
+
+
+    // role
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class ,'user_role' );
+    }
+    // rate
+    public function myRate()
+    {
+        return $this->hasMany(BookRate::class);
+    }
+    // buy
+    public function books()
+    {
+        return $this->belongsToMany(Book::class,"user_purchase_books")->withTimestamps();
+    }
+
+    // Favorites:   
+    public function book()
     {
         return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
     }
-
-    // 
-    public function FavoritesHas($bookId)
-    {
-        return self::Favorite()->where('book_id',$bookId)->exists();
-    }
-
-    
-
-
-
-
-
-
 }

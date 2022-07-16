@@ -1,17 +1,37 @@
-@extends("layouts.app") 
+@extends("layouts.app")
 
 @section("header")
 new post
 @endsection
 
 @section("content")
-         <div class="container ">
-            <div class="row   ">
-              <div class="  ">
-                    <nav class="navbar bg-light  float-end ">
-                        <div class="container-fluid d-flex">  Ordered By :
-                            <div class="btn-group pl-2 " role="group" aria-label="Basic mixed styles example">
-
+         <div class="container-fluied ">
+            <div class="row ">
+                    <nav class="navbar bg-light ">
+                        
+                        <div class="col-5">
+                            {!! Form::open(['route' => ['m-book.search'] , "class" => "container"  , "method" => "get" ]); !!}
+                              <div class=" mb-3">
+                                <label class="form-label">search:</label>
+                                {!! Form::text('search', null , ["class" => "form-control"] ); !!}
+                              </div>
+                              <p>
+                                <span class="px-4">
+                                    <label class="form-label">auther name</label>
+                                    {!! Form::radio('in', 'auther'); !!}
+                                </span>
+                                <span class="px-4">
+                                    <label class="form-label">book title</label>
+                                    {!! Form::radio('in', 'title'); !!}
+                                </span>
+                                <button type="submit" class="btn btn-primary text-dark">Submit</button>
+                              </p>
+                             
+                            {!! Form::close() !!} 
+                        </div>     
+                        
+                        <div class=" col-2">  Ordered By : <br> <br>
+                            <div class="btn-group mb-3 " role="group" aria-label="Basic mixed styles example">
                                 {!! Form::open(['route' => ['m-book.latest']  , "class" => "btn  p-0 ml-2 btn-danger" , "method" => "get"]) !!}
                                 <td><button  class="btn p-1 btn-danger">Latest</button></td>
                                 {!! Form::close() !!}
@@ -19,33 +39,9 @@ new post
                                 {!! Form::open(['route' => ['m-book.rate']  , "class" => "btn  p-0 btn-success" , "method" => "get"]) !!}
                                 <td><button  class="btn p-1 btn-success">Rate</button></td>
                                 {!! Form::close() !!}
-
-                              </div>
-
-
-
-                              {!! Form::open(['route' => ['m-book.search'] , "class" => "container"  , "method" => "get" ]); !!}
-                              <div class="d-flex mb-3">
-                                <label class="form-label">search</label>
-                                {!! Form::text('search', null , ["class" => "form-control"] ); !!}
-                              </div>
-                              <p>
-                                <span class="px-4">
-                                    <label class="form-label">auther name</label>
-                                    {!! Form::radio('in', 'auther'); !!}
-
-                                </span>
-
-                                <span class="px-4">
-                                    <label class="form-label">book title</label>
-                                    {!! Form::radio('in', 'title'); !!}
-                                </span>
-                              </p>
-                              <button type="submit" class="btn btn-primary text-dark d-flex">Submit</button>
-                              {!! Form::close() !!}
+                            </div>
                         </div>
-                      </nav>
-              </div>
+                    </nav>
             </div>
          </div>
               </div>
@@ -128,26 +124,34 @@ new post
 
                         <div class="card-footer">
                             <div class="d-flex gap-2 col-6 mx-auto">
-                                <button type="button" class="btn btn-warning ">Buy</button>
-
-                                {!! Form::open(['route' =>['Favorites.store'],"class" => "btn AddToFavorites","method"=> "POST"])!!}                                
+                            <!-- buy -->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                              <form action="{{route('buy')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="book_id" value="{{ $book->id}}">
+                                <input type="submit" value="buy" class="btn btn-warning ">
+                              </form>
+                            </div>
+                            <br>
+                            <!-- Fav -->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                              <form action="{{route('Fav')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="book_id" value="{{ $book->id}}">
                                 <button type="button" class="btn btn-outline-danger ">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path></svg>
                                 </button>
-                                {!! Form::close() !!}
-
-                               
+                              </form>
                             </div>
                         </div>
                     </div>
+                  </div>
                 </div>
-                @endforeach
+            @endforeach
 
                 @else
                 <div class="col-3 pt-5"> there is no such a data like u searched for . </div>
                 @endif
-
-
 
                 @if (auth()->user()->isAdmin)
                 {!! Form::open(['route' => ['m-book.create']  , "class" => "btn  btn-danger" , "method" => "get"]) !!}

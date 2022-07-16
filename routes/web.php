@@ -1,26 +1,24 @@
 <?php
+
 use App\Models\Book;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\FavoritesController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\CategoriesController;
+
+
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get('/shop', function () {
     return view('shopping' , ["books" => book::all()]);
@@ -75,13 +73,21 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('m-manger', "App\Http\Controllers\ManagerController");
+Route::resource('manager', "App\Http\Controllers\ManagerController");
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
 // Categories
 Route::resource('Categories', CategoriesController:: class)->middleware(['auth']);
 
 //Favorites Book
-Route::resource('Favorites', FavoritesController:: class)->middleware(['auth']);
+Route::get('/Favorites', function () {
+    $Book = auth()->user()->Book;
+    return view('Favorites' , compact('Book'));
+})->name("Favorites");
+
+Route::post('/Fav',[FavoritesController::class,'Fav_book'])->name('Fav');
+Route::delete('Favorites', 'FavoritesController@destroy')->name('Favorites.destroy');
+
 
 // Route::group(['namespace' => 'Favorites' , 'middleware' => 'auth'], function() {
 //     Route::post('Favorites', 'FavoritesController@store')->name('Favorites.store');
@@ -92,24 +98,17 @@ Route::resource('Favorites', FavoritesController:: class)->middleware(['auth']);
 
 // USER
 Route::group(['prefix' => 'users'], function() {
-    Route::get('/', 'App\Http\Controllers\UsersController@index')->name('users.index');
-    Route::get('/create', 'App\Http\Controllers\UsersController@create')->name('users.create');
-    Route::post('/create', 'App\Http\Controllers\UsersController@store')->name('users.store');
-    Route::get('/{user}/show', 'App\Http\Controllers\UsersController@show')->name('users.show');
-    Route::get('/{user}/edit', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
-    Route::PUT('/{user}/update', 'App\Http\Controllers\UsersController@update')->name('users.update');
-    Route::delete('/{user}/delete', 'App\Http\Controllers\UsersController@destroy')->name('users.destroy');
+    Route::get('/', 'UsersController@index')->name('users.index');
+    Route::get('/create', 'UsersController@create')->name('users.create');
+    Route::post('/create', 'UsersController@store')->name('users.store');
+    Route::get('/{user}/show', 'UsersController@show')->name('users.show');
+    Route::get('/{user}/edit', 'UsersController@edit')->name('users.edit');
+    Route::PUT('/{user}/update', 'UsersController@update')->name('users.update');
+    Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
 
 });
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
-//     Route::PUT('/profile', 'App\Http\Controllers\UsersController@update')->name('users.update');
-// });
-  
-
-
-// 
+// buy
 
 Route::get('/cart', function () {
     $books = auth()->user()->books;
@@ -118,3 +117,4 @@ Route::get('/cart', function () {
 
 
 Route::post('/buy',[BooksController::class,'buy_book'])->name('buy');
+

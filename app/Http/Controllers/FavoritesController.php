@@ -16,12 +16,6 @@ class FavoritesController extends Controller
      */
     public function index()
     {
-        $Books = auth()->user()
-                 ->Favorite()
-                 ->Latest()
-                 ->get();
-                //  dd($Books);
-        return view('Favorites',compact('Books'));
     }
 
     /**
@@ -87,12 +81,23 @@ class FavoritesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $Book , $id)
+    public function destroy(Book $book , $id)
     {
-        auth()->user()->Favorite()->detach(request('BookId'));
+        $book->find($id)->delete();
+        return redirect()->route("Favorites");
+
+        // auth()->user()->Favorite()->detach(request('BookId'));
 
     }
 
 
+    public function Fav_book(Request $request){
+        $Fuser = User::find(auth() -> user() -> id );
+        $Fuser -> book() -> syncWithoutDetaching([$request -> book_id]);
+        $Book = $Fuser->Book;
+        return view('Favorites' , compact('Book'));
+        
+
+    }
   
 }
