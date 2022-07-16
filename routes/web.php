@@ -80,9 +80,6 @@ Route::get('/book/search', function (request $request) {
 
 Route::post('/book/category', function (request $request) {
 
-    // dd($id);
-    // dd($request->category_id);
-
     return view('shopping' ,[
         "books" => book::where("category_id", $request->category_id)->get() ,
         "cats" => Category::all() ,

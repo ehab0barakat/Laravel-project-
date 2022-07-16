@@ -58,11 +58,14 @@ new post
                         {!! Form::close() !!}
 
                     </li>
+                    
 {{--
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold"><a href="#">{{$cat->name}}</a></div>
                             </div>
-                            <span class="badge bg-primary rounded-pill">{{$cat->count}}</span> --}}
+                            <span class="badge bg-primary rounded-pill">{{$cat->count}}</span>
+
+--}}
 
                         @endforeach
                       </ul>

@@ -15,12 +15,10 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        return view("shopping" , [
-            "books" => book::all() ,
-            "cats" => Category::all() ,
-            ]) ;
+        return view("shopping" , [ "books" => book::all() ,"cats" => Category::all() ]) ;
     }
 
     /**
