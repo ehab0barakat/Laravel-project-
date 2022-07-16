@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
@@ -74,6 +75,7 @@ require __DIR__.'/auth.php';
 
 Route::resource('m-manger', "App\Http\Controllers\ManagerController");
 Route::resource('manager', "App\Http\Controllers\ManagerController");
+Route::resource('cart', "App\Http\Controllers\CartController");
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
 // Categories
@@ -88,13 +90,6 @@ Route::get('/Favorites', function () {
 Route::post('/Fav',[FavoritesController::class,'Fav_book'])->name('Fav');
 Route::delete('Favorites', 'FavoritesController@destroy')->name('Favorites.destroy');
 
-
-// Route::group(['namespace' => 'Favorites' , 'middleware' => 'auth'], function() {
-//     Route::post('Favorites', 'FavoritesController@store')->name('Favorites.store');
-//     Route::get('Favorites/books', 'FavoritesController@index')->name('Favorites.index');
-//     Route::delete('Favorites', 'FavoritesController@destroy')->name('Favorites.destroy');
-
-// });
 
 // USER
 Route::group(['prefix' => 'users'], function() {
@@ -117,4 +112,17 @@ Route::get('/cart', function () {
 
 
 Route::post('/buy',[BooksController::class,'buy_book'])->name('buy');
+
+
+
+Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
+// Route::resource('bookComment', 'BookCommentController');
+Route::group(['prefix' => 'BookComment'], function() {
+    Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
+});
+
+Route::group(['prefix' => 'BookRate'], function() {
+    Route::get('/', 'App\Http\Controllers\BookRateController@store')->name('BookRate.store');
+});
+
 

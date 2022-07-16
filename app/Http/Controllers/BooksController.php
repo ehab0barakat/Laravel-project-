@@ -69,7 +69,9 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        //
+
+
+        return view("book" , ["book" => book::find($id)]);
     }
 
     /**
@@ -132,7 +134,7 @@ class BooksController extends Controller
         $user -> books() -> syncWithoutDetaching([$request -> book_id]);
         $books = $user->books;
         return view('book_cart' , compact('books'));
-        
+
 
     }
 }
