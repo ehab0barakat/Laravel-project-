@@ -18,6 +18,18 @@ class BooksController extends Controller
     public function index()
     {
         return view("shopping" , ["books" => book::all()]) ;
+
+        // filter
+        $Categories = Category:: select('id', 'name')->get();
+        $books= Book:: with('Category')->paginate();
+
+        return view('shopping' ,[
+            "books" => $books,
+            "Categories" => $Categories,
+        ]);
+
+
+
     }
 
     /**
@@ -129,7 +141,6 @@ class BooksController extends Controller
     }
 
     public function buy_book(Request $request){
-        // return $request->book_id;
         $user = User::find(auth() -> user() -> id );
         $user -> books() -> syncWithoutDetaching([$request -> book_id]);
         $books = $user->books;

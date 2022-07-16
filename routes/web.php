@@ -9,8 +9,6 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\CategoriesController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,26 +24,20 @@ Route::get('/shop', function () {
 });
 
 
-// ------------------------- (        start of orderby and search        ) -------------------------------------------
+// ------------------------- (    start of orderby, search and filter ) -------------------------------------------
 
 Route::get('/book/latest', function () {
-
     return view('shopping' , [ "books" => book::latest()->get() ]);
-
 })->name('m-book.latest');
 
 
-
 Route::get('/book/rate', function () {
-
     dd(book::all());
-
     return view('shopping' );
-
 })->name('m-book.rate');
 
 
-
+// 
 
 Route::get('/book/search', function (request $request) {
     if($request->in == "auther"){
@@ -58,12 +50,18 @@ Route::get('/book/search', function (request $request) {
     else {
         $books = [] ;
     }
-
     return view('shopping' ,["books" => $books ]);
-
 })->name('m-book.search');
 
-// ------------------------- (   end of orderby and search    ) -------------------------------------------
+// 
+
+// Route::get('/','BooksController@index');
+
+Route::get('/', function () {
+    return view('shopping' , [ "books" => book::filter()->get() ]);
+})->name('filter');
+
+// ------------------------- (  end of orderby, search and filter  ) -------------------------------------------
 
 
 Route::get('/dashboard', function () {
@@ -71,8 +69,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 require __DIR__.'/auth.php';
 
-
-
+// 
 Route::resource('m-manger', "App\Http\Controllers\ManagerController");
 Route::resource('manager', "App\Http\Controllers\ManagerController");
 Route::resource('cart', "App\Http\Controllers\CartController");
@@ -110,13 +107,10 @@ Route::get('/cart', function () {
     return view('book_cart' , compact('books'));
 })->name("cart");
 
-
 Route::post('/buy',[BooksController::class,'buy_book'])->name('buy');
 
-
-
+// 
 Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
-// Route::resource('bookComment', 'BookCommentController');
 Route::group(['prefix' => 'BookComment'], function() {
     Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
 });
