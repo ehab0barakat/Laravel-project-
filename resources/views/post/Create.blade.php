@@ -76,7 +76,7 @@
       <div class="row justify-content-center">
          <div class="col-lg-6">
             <div class="main">
-               <form role="form" action="{{route('post.store')}}" method="post">
+               <form role="form" action="{{route('post.store',$user->id)}}" method="post">
                   @csrf
                   <div class="form-group">
                      <label for="title">Post Title<span class="text-danger">*</span></label>

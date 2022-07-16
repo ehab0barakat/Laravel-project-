@@ -105,16 +105,7 @@
       </style>
    </head>
    <body>
-      <div class="header">
-         <h2>Laravel 8 Review Rating System | 8bityard.com.</h2>
-      </div>
-      <div class="row">
-         <div class="leftcolumn">
-            <div class="card">
-               <h2 style="color:#0071a1;">{{ $post_detail->title }}</h2>
-               <p style="color:#e91e63;">Published at : {{$post_detail->created_at->format('jS \\of F Y') }}</p>
-               <p>{{ $post_detail->description }}</p>
-               <hr>
+
                <!-- Display review section start -->
                <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                   <div>
@@ -201,12 +192,6 @@
                </div>
             </div>
          </div>
-         <div class="rightcolumn">
-            <div class="card">
-               <h2>About Me</h2>
-               <img class="fakeimg" style="height:100px;" src="https://8bityard.com/ezoimgfmt/mllibnjakigh.i.optimole.com/e4PqOHU-NUmggukx/w:110/h:48/q:auto/https://8bityard.com/wp-content/uploads/2020/05/cropped-cropped-LogoMakr_48yknb-2.png?ezimgfmt=rs:110x48/rscb1/ng:webp/ngcb1">
-               <p>Laravel | WordPress | JQuery.</p>
-            </div>
          </div>
       </div>
    </body>

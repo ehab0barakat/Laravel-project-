@@ -17,7 +17,6 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->longText('description');
-            $table->string('author');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             $table->foreign('user_id')->references('id')->on('users');

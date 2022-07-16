@@ -18,6 +18,9 @@ class CreateReviewRatingsTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->longText('comments')->nullable();
             $table->integer('star_rating');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             $table->foreign('user_id')->references('id')->on('users');

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth ;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Book ;
 use App\Models\BookRate ;
 use App\Models\Category ;
@@ -71,6 +71,9 @@ class BooksController extends Controller
     public function show($id)
     {
      //
+
+
+        return view("book" , ["book" => book::find($id),'user'=>Auth::user()->id]);
     }
 
     /**

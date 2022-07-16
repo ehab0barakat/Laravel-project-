@@ -7,12 +7,12 @@
         @if(session()->has('success'))
         <div class="alert alert-success"> {{ session()->get('success') }} </div>
         @endif
-        @foreach ($books as $book) 
+        {{-- @foreach ($books as $book)  --}}
         <div class="col-md-12">
             <div class="card">
-                
+
                 <div class="card-header"> {{$book->title}} </div>
-                
+
                     <div class="card mb-3" style="max-width: 540px; border: none;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
@@ -31,14 +31,19 @@
                                             {{\Carbon\Carbon::parse($book->created_at)->diffForHumans()}}</small>
                                     </p>
                                 </div>
+                                <button type="button" class="btn btn-warning"><a href="{{ route('post.list',$user) }}" class="btn btn-default">Rate And Comment</a></button>
+
+
                             </div>
+
                         </div>
                     </div>
-                   
+
+
 
                     <!-- Store Comment -->
                     <div>
-                       
+
                         <div class="form-row">
                             {!! Form::open(['route' => 'BookComment.store']) !!}
                             <div class="col-md-9">
@@ -51,14 +56,14 @@
                             {!! Form::close() !!}
 
                             {{-- store Rates --}}
-                          
-                           
+
+
 
 
                           {{-- list comments --}}
                             <div class="mt-5">
                                 <div class="list-group">
-                                    
+
                                     @forelse ($book->comments as $comment)
                                     <span class="list-group-item list-group-item-action">
                                         <div class="d-flex w-100 justify-content-between bg-light">
@@ -70,19 +75,19 @@
                                     @empty
                                     <p>There Is No Comments ... !</p>
                                     @endforelse
-        
+
                                 </div>
-                           
+
                         </div>
 
                     </div>
 
-                   
+
 
                 </div>
             </div>
         </div>
-        @endforeach
+        {{-- @endforeach --}}
     </div>
 </div>
 @endsection

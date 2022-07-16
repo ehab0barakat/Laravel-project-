@@ -61,23 +61,26 @@ body {
 </head>
 <body>
 
-<div class="header">
-  <h2>Laravel 8 Review Rating System | 8bityard.com.</h2>
-</div>
 
 <div class="row">
   <div class="leftcolumn">
 
    @foreach($posts as $post)
     <div class="card">
-      <h2 style="color:#0071a1;">{{ $post->title }}</h2>
-      <h5 style="color:#e91e63;">Published at : {{$post->created_at->format('jS \\of F Y') }}</h5>
 
 
-      <p>{{ $post->description }}</p>
-      <p><b><a href="{{route('post.view',$post->id)}}">Read Article</a></b></p>
+            {{-- {!! Form::open(['route' => 'post.view']) !!}
+            <div class="col-md-9">
+                {!! Form::hidden('post_id', $book->id) !!}
+                {!! Form::hidden('user_id', Auth::id()) !!}
+                {!! Form::textarea('comment',null,['class'=>'form-control','rows'=>3,
+                'placeholder'=>'your comment...']) !!}
+                {!! Form::submit('Forward Rate',['class'=>'btn btn-success mt-3 w-100']) !!}
+            </div>
+            {!! Form::close() !!} --}}
+      <p><b><a href="{{route('post.view',$post->id)}}">forward Rate</a></b></p>
 
-    </div>
+
 
    @endforeach
   </div>

@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\BooksController;
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoriesController;
@@ -85,7 +86,10 @@ require __DIR__.'/auth.php';
 Route::resource('manager', "App\Http\Controllers\ManagerController");
 
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
-Route::post('/buy',[BooksController::class,'buy_book'])->name('buy');
+
+
+Route::resource('cart', "App\Http\Controllers\CartController");
+
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
 //
@@ -103,6 +107,20 @@ Route::group(['prefix' => 'users'], function() {
 
 });
 
+
+
+Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
+// Route::resource('bookComment', 'BookCommentController');
+Route::group(['prefix' => 'BookComment'], function() {
+    Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
+});
+
+Route::group(['prefix' => 'BookRate'], function() {
+    Route::get('/', 'App\Http\Controllers\BookRateController@store')->name('BookRate.store');
+});
+
+
+
 // Route::middleware('auth')->group(function () {
 //     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
 //     Route::PUT('/profile', 'App\Http\Controllers\UsersController@update')->name('users.update');
@@ -115,5 +133,5 @@ Route::get('/post-list','App\Http\Controllers\PostController@list')->name('post.
 Route::get('/post-view/{id}','App\Http\Controllers\PostController@view')->name('post.view');
 
 #Manage Review
-Route::post('/review-store',[PostController::class, 'reviewstore'])->name('review.store');
+Route::post('/review-store','App\Http\Controllers\PostController@reviewstore')->name('review.store');
 
