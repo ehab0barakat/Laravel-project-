@@ -3,23 +3,24 @@
 @section('content')
 
 <section class="h-100 h-custom">
-@foreach ($books as $book)
-  <div class="container h-100 py-5">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col">
+    <div class="container h-100 py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
 
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" class="h5">MY BOOK</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="h5">MY BOOK</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($books as $book)
+                        <tr>
+
                 <th scope="row">
                   <div class="d-flex align-items-center">
                   <img src="{{ $book->image  }}" class="card-img-top img" style="width:200px";>
@@ -29,7 +30,6 @@
                     </div>
                   </div>
                 </th>
-
 
                 <td class="align-middle">
                   <p class="mb-0" style="font-weight: 500;">{{ $book->description  }}</p>
@@ -48,6 +48,7 @@
 
                 </td>
               </tr>
+              @endforeach
 
             </tbody>
           </table>
@@ -57,7 +58,6 @@
       </div>
     </div>
   </div>
-    @endforeach
 
                 <div class="container ">
                     <div>
