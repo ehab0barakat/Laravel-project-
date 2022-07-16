@@ -1,5 +1,7 @@
 <?php
+use App\Http\Controllers\BooksController;
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoriesController;
@@ -18,6 +20,12 @@ use App\Http\Controllers\CategoriesController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/cart', function () {
+    $books = auth()->user()->books;
+    return view('book_cart' , compact('books'));
+})->name("cart");
+
 
 
 Route::get('/shop', function () {
@@ -78,6 +86,10 @@ require __DIR__.'/auth.php';
 Route::resource('manager', "App\Http\Controllers\ManagerController");
 
 // Route::resource('m-user', "App\Http\Controllers\UsersController");
+
+
+Route::resource('cart', "App\Http\Controllers\CartController");
+
 Route::resource('m-book', "App\Http\Controllers\booksController");
 
 //
@@ -94,6 +106,20 @@ Route::group(['prefix' => 'users'], function() {
     Route::delete('/{user}/delete', 'App\Http\Controllers\UsersController@destroy')->name('users.destroy');
 
 });
+
+
+
+Route::get('/book', 'App\Http\Controllers\BookDescriptionController@index')->name('book.index');
+// Route::resource('bookComment', 'BookCommentController');
+Route::group(['prefix' => 'BookComment'], function() {
+    Route::post('/', 'App\Http\Controllers\BookCommentController@store')->name('BookComment.store');
+});
+
+Route::group(['prefix' => 'BookRate'], function() {
+    Route::get('/', 'App\Http\Controllers\BookRateController@store')->name('BookRate.store');
+});
+
+
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/{user}/profile', 'App\Http\Controllers\UsersController@edit')->name('users.edit');
