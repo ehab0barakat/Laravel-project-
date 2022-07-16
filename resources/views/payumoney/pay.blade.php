@@ -1,7 +1,16 @@
-
-@extends("layouts.app")
-
-@section("content")
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{{asset('payumoney/payu.css')}}">
+    <title>Paymoney</title>
 
     <script>
         var hash = '{{$hash}}';
@@ -14,10 +23,8 @@
             payuForm.submit();
         }
     </script>
-
-
 </head>
-{{-- < onload="submitPayuForm()"> --}}
+<body onload="submitPayuForm()">
 <div class="payfrom">
     <div class="main-form position-relative">
         <div class="infyom-logo">
@@ -63,7 +70,7 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group mb-3 position-relative">
-                            <input class="input-box form-control w-100" hidden placeholder="Phone *"  type="number" name="phone"
+                            <input class="input-box form-control w-100" hidden placeholder="Phone *" type="number" name="phone"
                                    value="010">
                             <div class="icon-group-append">
                                 <i class="fas fa-phone-alt"></i>
@@ -95,12 +102,15 @@
             </div>
             @endif
             <input name="surl" value="{{route('payumoney-success')}}" hidden/>
-            <input name="furl" value="{{route('m-book.index')}}" hidden/>
+            <input name="furl" value="{{route('payumoney-cancel')}}" hidden/>
             <input type="hidden" name="service_provider" value="payu_paisa"/>
         </form>
     </div>
 </div>
 
-@endsection
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+</html>

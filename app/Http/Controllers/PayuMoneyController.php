@@ -12,11 +12,13 @@ class PayuMoneyController extends \InfyOm\Payu\PayuMoneyController
 {
     public function paymentCancel(Request $request)
     {
-        $data = $request->all();
-        echo "<pre>";
-        print_r($data);
-        dd("ehab");
-        die;
+        // $data = $request->all();
+        // echo "<pre>";
+        // print_r($data);
+        // die;
+        // // your code here
+
+        return redirect()->route("m-book.index");
     }
 
     public function paymentSuccess(Request $request)

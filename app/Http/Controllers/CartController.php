@@ -6,7 +6,8 @@ use App\Models\Book ;
 use App\Models\Category ;
 use App\Models\User ;
 use App\Models\Manager ;
-use App\Models\UserFavouritesBooks ;
+use App\Models\UserRole ;
+use App\Models\UserPurchaseBooks ;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -18,13 +19,18 @@ class CartController extends Controller
      */
     public function index(User $user)
     {
+        $sum = 0 ;
+
+        $user = User::find(auth() -> user() -> id );
+        $user -> books();
+
         $books = $user->books;
 
-        // dd($books);
+        foreach ($books as $book){
+            $sum += $book->price ;
+        }
 
-        dd(UserFavouritesBooks::all());
-
-        return view('book_cart' , compact('books'));
+        return view('book_cart' , compact('books'), compact('sum'));
     }
 
     /**
@@ -45,12 +51,11 @@ class CartController extends Controller
          */
         public function store(Request $request)
         {
-                    // return $request->book_id;
-        $user = User::find(auth() -> user() -> id );
-        $user -> books() -> syncWithoutDetaching([$request -> book_id]);
+            // return $request->book_id;
 
-
-        $books = $user->books;
+            $user = User::find(auth() -> user() -> id );
+            $user -> books() -> syncWithoutDetaching([$request -> book_id]);
+            $books = $user->books;
 
         return redirect()->route("m-book.index");
 
@@ -87,8 +92,13 @@ class CartController extends Controller
     public function destroy(Book $book , $id)
     {
 
-    }
+    UserPurchaseBooks::where("book_id" , $id)
+                            ->where("user_id" , Auth::user()->id)
+                            ->delete();
 
+    return redirect()->route("cart.index");
+
+    }
 
 }
 
