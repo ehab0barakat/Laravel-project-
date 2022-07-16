@@ -73,25 +73,23 @@ class User extends Authenticatable
 
 
 
+public function roles(){
+    return $this->belongsToMany(Role::class ,'user_role' );
+}
 
-    // role
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class ,'user_role' );
-    }
-    // rate
-    public function myRate()
-    {
-        return $this->hasMany(BookRate::class);
-    }
-    // buy
+public function myRate()
+{
+    return $this->hasMany(BookRate::class);
+}
+
     public function books()
     {
         return $this->belongsToMany(Book::class,"user_purchase_books")->withTimestamps();
     }
 
-    // Favorites:   
-    public function book()
+
+
+    public function favs()
     {
         return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
     }

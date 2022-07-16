@@ -16,6 +16,15 @@ class FavoritesController extends Controller
      */
     public function index()
     {
+
+        $user = User::find(auth() -> user() -> id );
+        $user -> books();
+        $books = $user->favs;
+
+        foreach ($books as $book){
+            $sum += $book->price ;
+        }
+        return view('book_cart' , compact('books'));
     }
 
     /**
@@ -96,8 +105,8 @@ class FavoritesController extends Controller
         $Fuser -> book() -> syncWithoutDetaching([$request -> book_id]);
         $Book = $Fuser->Book;
         return view('Favorites' , compact('Book'));
-        
+
 
     }
-  
+
 }

@@ -10,15 +10,13 @@ use App\Models\Book;
 class Category extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
 
 
     protected $table = "categories" ;
 //
 
     protected $fillable = ['id', 'name'];
-
-
 
 
     public function books()

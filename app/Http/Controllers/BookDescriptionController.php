@@ -14,6 +14,8 @@ class BookDescriptionController extends Controller
      */
     public function index()
     {
+        $books= Book::all();
+        return view('book',['books'=>$books]);
         // $books= Book::all();
 
         // return view('book',['books'=>$books]);

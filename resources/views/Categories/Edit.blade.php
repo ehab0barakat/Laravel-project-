@@ -20,10 +20,12 @@
         </ul>
       </div><br />
     @endif
-      <form method="PUT" action="{{ route('Categories.update', $Category->id ) }}">
+      {{-- <form method="post" action="{{ route('Categories.update', $Category->id ) }}"> --}}
+        {!! Form::open(['route' => ['Categories.update', $Category->id ] , "method" => "PUT" ]) !!}
+
           <div class="form-group  m-3">
-              @csrf
-              @method('PUT')
+              {{-- @csrf --}}
+              {{-- @method('PUT') --}}
               <label for="country_name">Category Name:</label>
               <input type="text" class="form-control" name="name" value="{{ $Category->name }}"/>
           </div>
@@ -32,7 +34,9 @@
               <input type="text" class="form-control" name="id" value="{{ $Category->id }}"/>
           </div>
           <button type="submit" class="btn btn-primary  m-3">Update Data</button>
-      </form>
+          {!! Form::close() !!}
+
+      {{-- </form> --}}
   </div>
 </div>
 @endsection

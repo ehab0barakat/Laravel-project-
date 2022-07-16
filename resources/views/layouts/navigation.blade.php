@@ -25,11 +25,11 @@
                         {{ __('Categories') }}
                     </x-nav-link>
                     @endif
-                    
-                    <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+
+                    {{-- <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
                         {{ __('My Book') }}
-                    </x-nav-link>
-                    
+                    </x-nav-link> --}}
+
                     <x-nav-link :href="route('Favorites')" :active="request()->routeIs('Favorites')">
                         {{ __('Favorites') }}
                     </x-nav-link>
@@ -37,6 +37,9 @@
                         {{ __('My Profile') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
+                        {{ __('my book') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('manager.index')" :active="request()->routeIs('manager')">
                         {{ __('control settings') }}
                     </x-nav-link>

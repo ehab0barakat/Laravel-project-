@@ -8,7 +8,7 @@ new post
          <div class="container-fluied ">
             <div class="row ">
                     <nav class="navbar bg-light ">
-                        
+
                         <div class="col-5">
                             {!! Form::open(['route' => ['m-book.search'] , "class" => "container"  , "method" => "get" ]); !!}
                               <div class=" mb-3">
@@ -26,10 +26,10 @@ new post
                                 </span>
                                 <button type="submit" class="btn btn-primary text-dark">Submit</button>
                               </p>
-                             
-                            {!! Form::close() !!} 
-                        </div>     
-                        
+
+                            {!! Form::close() !!}
+                        </div>
+
                         <div class=" col-2">  Ordered By : <br> <br>
                             <div class="btn-group mb-3 " role="group" aria-label="Basic mixed styles example">
                                 {!! Form::open(['route' => ['m-book.latest']  , "class" => "btn  p-0 ml-2 btn-danger" , "method" => "get"]) !!}
@@ -186,4 +186,4 @@ new post
               </div>
     @endsection
 
-    
+
