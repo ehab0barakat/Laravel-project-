@@ -93,4 +93,5 @@ public function myRate()
     {
         return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
     }
+    
 }

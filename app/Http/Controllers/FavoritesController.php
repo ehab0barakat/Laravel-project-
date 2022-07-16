@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Favorites;
 use App\Models\Book ;
 use App\Models\User ;
+use App\Models\UserFavouriteBooks ;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
 {
@@ -16,15 +18,11 @@ class FavoritesController extends Controller
      */
     public function index()
     {
-
         $user = User::find(auth() -> user() -> id );
-        $user -> books();
-        $books = $user->favs;
-
-        foreach ($books as $book){
-            $sum += $book->price ;
-        }
-        return view('book_cart' , compact('books'));
+        $user -> favs();
+        $Books = $user->favs;
+        // dd($books);
+        return view('Favorites' , compact('Books'));
     }
 
     /**
@@ -45,9 +43,20 @@ class FavoritesController extends Controller
      */
     public function store(Request $request)
     {
-        if (! auth()->user()->FavoritesHas(request('BookId'))){
-            auth()->user()->Favorite()->attach(request('BookId'));
-        }
+        // if (! auth()->user()->FavoritesHas(request('BookId'))){
+        //     auth()->user()->Favorite()->attach(request('BookId'));
+        // }
+        // dd($id);
+
+        $user = User::find(auth() -> user() -> id );
+        $user -> favs() -> syncWithoutDetaching([$request -> book_id]);
+        $books = $user->favs;
+        // dd($user -> favs());
+        // dd($user -> favs() -> syncWithoutDetaching([$request -> book_id]));
+
+
+        return redirect()->route("m-book.index");
+
     }
 
     /**
@@ -92,21 +101,28 @@ class FavoritesController extends Controller
      */
     public function destroy(Book $book , $id)
     {
-        $book->find($id)->delete();
-        return redirect()->route("Favorites");
+
+        UserFavouriteBooks::where("book_id" , $id)
+        ->where("user_id" , Auth::user()->id)
+        ->delete();
+
+        return redirect()->route("favourites.index");
+
+}
+        // $book->find($id)->delete();
+        // return redirect()->route("Favorites");
 
         // auth()->user()->Favorite()->detach(request('BookId'));
 
     }
 
 
-    public function Fav_book(Request $request){
-        $Fuser = User::find(auth() -> user() -> id );
-        $Fuser -> book() -> syncWithoutDetaching([$request -> book_id]);
-        $Book = $Fuser->Book;
-        return view('Favorites' , compact('Book'));
+    // public function Fav_book(Request $request){
+    //     $Fuser = User::find(auth() -> user() -> id );
+    //     $Fuser -> book() -> syncWithoutDetaching([$request -> book_id]);
+    //     $Book = $Fuser->Book;
+    //     return view('Favorites' , compact('Book'));
 
+    // }
 
-    }
-
-}
+// }

@@ -89,17 +89,22 @@ Route::resource('m-book', "App\Http\Controllers\booksController");
 Route::resource('Categories', CategoriesController:: class)->middleware(['auth']);
 
 
+//Favorites Book
+Route::resource('favourites', FavoritesController:: class)->middleware(['auth']);
+
+
+
 
 //Favorites Book
-Route::get('/Favorites', function () {
-    $Book = auth()->user()->Book;
-    return view('Favorites' , compact('Book'));
-})->name("Favorites");
+// Route::get('/Favorites', function () {
+//     $Books = auth()->user()->Book;
+//     return view('Favorites' , compact('Books'));
+// })->name("Favorites");
 
 
-Route::post('/Fav',[FavoritesController::class,'Fav_book'])->name('Fav');
+// Route::post('/Fav',[FavoritesController::class,'Fav_book'])->name('Fav');
 
-Route::delete('Favorites', 'FavoritesController@destroy')->name('Favorites.destroy');
+// Route::delete('Favorites', 'FavoritesController@destroy')->name('Favorites.destroy');
 
 
 

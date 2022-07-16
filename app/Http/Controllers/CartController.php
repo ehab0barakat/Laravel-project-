@@ -23,9 +23,7 @@ class CartController extends Controller
 
         $user = User::find(auth() -> user() -> id );
         $user -> books();
-
         $books = $user->books;
-
         foreach ($books as $book){
             $sum += $book->price ;
         }

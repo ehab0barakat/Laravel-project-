@@ -30,7 +30,7 @@
                         {{ __('My Book') }}
                     </x-nav-link> --}}
 
-                    <x-nav-link :href="route('Favorites')" :active="request()->routeIs('Favorites')">
+                    <x-nav-link :href="route('favourites.index')" :active="request()->routeIs('favourites.index')">
                         {{ __('Favorites') }}
                     </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
