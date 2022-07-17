@@ -19,7 +19,7 @@ use App\Http\Controllers\CategoriesController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route("m-book.index");
 });
 
 // Route::get('/cart', function () {
