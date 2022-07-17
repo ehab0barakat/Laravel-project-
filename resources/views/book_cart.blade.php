@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($books as $book)
+        @foreach ($books as $book)
                         <tr>
 
                 <th scope="row">
@@ -48,7 +48,7 @@
 
                 </td>
               </tr>
-              @endforeach
+        @endforeach
 
             </tbody>
           </table>

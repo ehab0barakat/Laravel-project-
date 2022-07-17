@@ -58,7 +58,7 @@ new post
                         {!! Form::close() !!}
 
                     </li>
-                    
+
 {{--
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold"><a href="#">{{$cat->name}}</a></div>
@@ -79,6 +79,7 @@ new post
                     <div class="card h-100">
 
                         @if (auth()->user()->isAdmin)
+
                         <div class="d-flex gap-2 mx-auto " >
 
                             {!! Form::open(['route' => ['m-book.edit' , $book->id ]  , "class" => "btn  p-0 btn-primary" , "method" => "get"]) !!}

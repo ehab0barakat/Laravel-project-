@@ -29,6 +29,8 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
+        "isActive",
+        "isAdmin"
     ];
 
     /**
@@ -93,5 +95,5 @@ public function myRate()
     {
         return $this->belongsToMany(Book::class,"user_favourites_books")->withTimestamps();
     }
-    
+
 }

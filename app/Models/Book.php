@@ -23,6 +23,10 @@ class Book extends Model
         return $this->belongsTo(Category::class , "category_id");
     }
 
+    public function book()
+    {
+        return $this->hasMany(ReviewRating::class , "review_ratings_id");
+    }
 
     public function relate_user()
     {
@@ -44,10 +48,17 @@ class Book extends Model
     public function comments(){
         return $this->hasMany(BookComment::class);
     }
+    public function post(){
+        return $this->hasMany(Post::class);
+    }
     // public function rates(){
         //     return $this->hasMany(BookRate::class);
         // }
-
+        public function ReviewData()
+        {
+    return $this->hasMany('App\Models\ReviewRating', 'post_id');
+    return $this->hasMany('App\Models\ReviewRating', 'post_id');
+}
     public function ratings()
     {
         // return $this->hasMany('App\Models\BookRate');

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth ;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Book ;
+use App\Models\BookRate ;
 use App\Models\Category ;
+use App\Models\ReviewRating;
 use App\Models\User ;
 use App\Models\Manager ;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
         return view("shopping" , [ "books" => book::all() ,"cats" => Category::all() ]) ;
@@ -70,9 +72,12 @@ class BooksController extends Controller
      */
     public function show($id)
     {
+        $reviews=ReviewRating::where ('book_id',$id)->where('user_id',Auth::user()->id)->get();
+    //  $reviews=[];
 
 
-        return view("book" , ["book" => book::find($id)]);
+
+        return view("book" , ["book" => book::find($id),'user'=>Auth::user()->id,'reviews'=>$reviews]);
     }
 
     /**
@@ -103,7 +108,7 @@ class BooksController extends Controller
         $cat_arr =[] ;
         foreach (category::all() as $cat) {
             array_push($cat_arr , $cat->id) ;
-          }
+        }
 
         $book->find($id)->update([
             "title" =>$request->title,

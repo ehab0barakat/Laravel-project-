@@ -117,11 +117,9 @@ class ManagerController extends Controller
     public function update(User $user, Request $request ,$id)
     {
 
-        // dd($request);
+        // dd($request->all());
 
         UserRole::where("user_id",$id)->update(["role_id" => isset($request->isAdmin) ? "1" : "2"]);
-
-
 
         $user->find($id)->update([
             "name" =>$request->name,

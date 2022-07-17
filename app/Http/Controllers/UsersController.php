@@ -1,13 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
 class UsersController extends Controller
 {
     /**

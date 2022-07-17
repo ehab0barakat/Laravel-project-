@@ -4,8 +4,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+
+
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
@@ -13,38 +15,29 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if (auth()->user()->isAdmin)
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @else
+
                     <x-nav-link :href="route('m-book.index')" :active="request()->routeIs('m-book.index')">
                         {{ __('Home') }}
-                    </x-nav-link>
-
-                    @if (auth()->user()->isAdmin)
-                    <x-nav-link :href="route('Categories.index')" :active="request()->routeIs('Categories.index')">
-                        {{ __('Categories') }}
-                    </x-nav-link>
-                    @endif
-
-                    {{-- <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
-                        {{ __('My Book') }}
-                    </x-nav-link> --}}
-
-                    <x-nav-link :href="route('favourites.index')" :active="request()->routeIs('favourites.index')">
-                        {{ __('Favorites') }}
                     </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('My Profile') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('favourites.index')" :active="request()->routeIs('favourites.index')">
+                        {{ __('Favorites') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('cart.index')" :active="request()->routeIs('cart.index')">
                         {{ __('my book') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('manager.index')" :active="request()->routeIs('manager')">
-                        {{ __('control settings') }}
-                    </x-nav-link>
 
-
+                    @endif
                 </div>
 
 

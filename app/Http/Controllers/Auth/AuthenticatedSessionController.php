@@ -29,15 +29,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        if(user::where("username" ,$request->username)->first()->isActive == 1){
-            $request->authenticate();
+        $active = user::where("username" ,$request->username)->first()->isActive == 1 ;
+        $admin = user::where("username" ,$request->username)->first()->isAdmin == 1 ;
+        if($active){
+            if($admin){
+                $request->authenticate();
                 $request->session()->regenerate();
-                return redirect()->intended(RouteServiceProvider::HOME);
+                // return redirect()->intended(RouteServiceProvider::HOME);
+                return view("dashboard");
+            }else{
+                $request->authenticate();
+                $request->session()->regenerate();
+                return redirect()->route("m-book.index");
+            };
         }else{
-            return abort(503);;
+            return abort(503);
         }
-
     }
+
 
     /**
      * Destroy an authenticated session.

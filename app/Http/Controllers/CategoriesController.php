@@ -66,6 +66,7 @@ class CategoriesController extends Controller
     // public function edit(Category $Category)
     public function edit($id)
     {
+
         $Category = Category::findOrFail($id);
         return view('Categories.Edit', compact('Category'));
     }

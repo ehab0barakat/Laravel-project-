@@ -177,3 +177,11 @@ Route::group(['prefix' => 'BookRate'], function() {
 //     return view('shopping' ,["books" => $books ]);
 
 // })->name('category.filter');
+#Manage Post
+Route::post('/post-create','App\Http\Controllers\PostController@create')->name('post.create');
+Route::post('/post-store','App\Http\Controllers\PostController@store')->name('post.store');
+Route::get('/post-list','App\Http\Controllers\PostController@list')->name('post.list');
+Route::POST('/post-view/{id_book}/{id_user}','App\Http\Controllers\PostController@view')->name('post.view');
+#Manage Review
+Route::post('/review.store/{id_book}/{id_user}','App\Http\Controllers\PostController@reviewstore')->name('review.store');
+
