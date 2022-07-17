@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReviewRating extends Model
 {
+    // protected $fillable = ['star_rating'];
     use HasFactory;
 }

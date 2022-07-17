@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
    <head>
@@ -106,39 +107,18 @@
    </head>
    <body>
 
-               <!-- Display review section start -->
-               <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                  <div>
-                     <div class="row mt-5">
-                        <h4>Comment Section :</h4>
-                        <div class="col-sm-12 mt-5">
-                           @foreach($post_detail->ReviewData as $review)
-                           <div class=" review-content">
-                              <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar ">
-                              <span class="font-weight-bold ml-2">{{$review->name}}</span>
-                              <p class="mt-1">
-                                 @for($i=1; $i<=$review->star_rating; $i++)
-                                 <span><i class="fa fa-star text-warning"></i></span>
-                                 @endfor
-                                 <span class="font ml-2">{{$review->email}}</span>
-                              </p>
-                              <p class="description ">
-                                 {{$review->comments}}
-                              </p>
-                           </div>
-                           <hr>
-                           @endforeach
-                        </div>
-                     </div>
-                  </div>
-               </div>
                <!-- Review store Section -->
                <div class="container">
                   <div class="row">
                      <div class="col-sm-10 mt-4 ">
-                        <form class="py-2 px-4" action="{{route('review.store')}}" style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
-                           @csrf
-                           <input type="hidden" name="post_id" value="{{$post_detail->id}}">
+                        <div class="form-row">
+                            {!! Form::open(['method' => 'post', 'route' => ['review.store', $book, $user], 'style' => 'display:inline']) !!}
+
+                                                                      {!! Form::hidden('book_id', $book) !!}
+                                                                      {!! Form::hidden('user_id', Auth::id()) !!}
+
+
+                                                                                           @csrf
                            <div class="row justify-content-end mb-1">
                               <div class="col-sm-8 float-right">
                                  @if(Session::has('flash_msg_success'))
@@ -183,15 +163,13 @@
                               </div>
                            </div>
                            <div class="mt-3 ">
-                              <button class="btn btn-sm py-2 px-3 btn-info">Submit
-                              </button>
                            </div>
-                        </form>
+                           {!! Form::submit('Submit') !!}
+                           {!! Form::close() !!}
                      </div>
                   </div>
                </div>
             </div>
-         </div>
          </div>
       </div>
    </body>

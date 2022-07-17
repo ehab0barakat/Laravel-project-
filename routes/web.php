@@ -127,11 +127,10 @@ Route::group(['prefix' => 'BookRate'], function() {
 // });
 
 #Manage Post
-Route::get('/post-create','App\Http\Controllers\PostController@create')->name('post.create');
+Route::post('/post-create','App\Http\Controllers\PostController@create')->name('post.create');
 Route::post('/post-store','App\Http\Controllers\PostController@store')->name('post.store');
 Route::get('/post-list','App\Http\Controllers\PostController@list')->name('post.list');
-Route::get('/post-view/{id}','App\Http\Controllers\PostController@view')->name('post.view');
-
+Route::POST('/post-view/{id_book}/{id_user}','App\Http\Controllers\PostController@view')->name('post.view');
 #Manage Review
-Route::post('/review-store','App\Http\Controllers\PostController@reviewstore')->name('review.store');
+Route::post('/review.store/{id_book}/{id_user}','App\Http\Controllers\PostController@reviewstore')->name('review.store');
 
